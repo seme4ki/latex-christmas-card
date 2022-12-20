@@ -1,0 +1,173 @@
+\documentclass[20pt]{article}
+\usepackage[utf8]{inputenc}
+% for font
+\usepackage{bbold}
+\usepackage[T1]{fontenc}
+
+% The next two lines provide an alternative font, that can be compiled with PdfLaTeX.
+% If you want to use it, comment out the bbold and fontenc commands above and comment 
+% in the next two lines.
+% Other fonts are available at https://tug.org/FontCatalogue/. 
+% Note that some of them need additional packages and/or require compilation with 
+% XeLaTeX or LuaLaTeX.
+
+%\renewcommand*\familydefault{uni}
+%\usepackage[OT1]{fontenc} %% Universal doesn't work with T1
+
+% for defining a standard font size larger than 12pt
+\usepackage{extsizes}
+\usepackage[a6paper,margin={0cm,0cm}]{geometry}
+
+\usepackage{wallpaper}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+% for snowflake
+\usepackage[weather]{ifsym}
+ 
+\definecolor{pageBackgroundColor}{HTML}{F7F8F3}
+
+% christmas balls
+\definecolor{vintagebrown}{HTML}{BB8A73}
+\definecolor{vintageblue}{HTML}{B0B6C9}
+
+% sled
+\definecolor{brown}{HTML}{846953}
+
+% blue present
+\definecolor{lightblue}{HTML}{ADC5CE}
+\definecolor{starBlue}{HTML}{68AEB8}
+\definecolor{darkblue}{HTML}{3A6289}
+
+% grey present
+\definecolor{lightred}{HTML}{E26868}
+\definecolor{grey}{HTML}{D8D9CF}
+
+% green pesent
+\definecolor{dotGreen}{HTML}{678983}
+\definecolor{lightgreen}{HTML}{C8DBBE}
+\definecolor{darkgreen}{HTML}{3D5656}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                             %%
+%% PLEASE INSERT THE NAME HERE %%
+%% OR LEAVE EMPTY IF YOU DON'T %%
+%% WANT ONE                    %%
+%%                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\name}{}
+
+\begin{document}
+	\centering
+	\pagecolor{pageBackgroundColor}
+	% gets rid of page numbering
+	\pagestyle{empty}
+	% \large
+	% comment this out if you use the alternative font
+	\bbfamily
+	
+	% christmas balls 
+	\begin{tikzpicture}
+		\begin{scope}
+			\def\vintagebrown{vintagebrown}
+			\def\vintageblue{vintageblue}
+			\foreach \x/\y/\c/\i in {
+				0/0/\vintageblue/\vintagebrown, 2/0.5/\vintagebrown/\vintageblue, 4/0/\vintageblue/\vintagebrown, 
+				6/0.5/\vintagebrown/\vintageblue, 8/0/\vintageblue/\vintagebrown
+			}{
+				\draw[\c, line width=1] (\x,0) -- (\x,2);
+				\filldraw[\c] (\x,\y+0.5) circle (0.1);
+				\filldraw[color=\i] (\x,\y) circle (0.5);
+				\draw (\x,\y) node[font=\fontsize{20}{80},text=white]{\Snow};
+			}
+		\end{scope}	
+	\end{tikzpicture}
+
+	% You may have to adjust the vspaces depending on the length of the given name.
+	\vspace*{10px}
+	MERRY CHRISTMAS\ifthenelse{\equal{\name}{}}{}{, \name,}
+	\vspace*{10px}
+	
+	% Adjust the factor to make the sled with presents appear bigger or smaller.
+	\scalebox{0.9}{
+	\begin{tikzpicture}
+		% to make the coordinate system bigger
+		\draw[pageBackgroundColor] (7,0) circle (0);
+		
+		% sled
+		\begin{scope}
+		[shift={(0,-0.3)}]
+			% upper bar
+			\filldraw[fill=brown,draw=brown] (0.5,0) rectangle (5.5,-0.25);
+			% pillars
+			\filldraw[fill=brown,draw=brown] (1.5,-0.25) rectangle (1.75,-1.5);
+			\filldraw[fill=brown,draw=brown] (4.5,-0.25) rectangle (4.75,-1.5);
+			% bottom bar
+			\fill[brown] (0,-1.5) rectangle (5.75,-1.75);
+			% curve
+			\draw[line width=7,brown] (0.1,-0.873) circle (-0.755);
+			\filldraw [fill=pageBackgroundColor, pageBackgroundColor] (0.2,-1.49) rectangle (1,-0.265);
+			\filldraw [fill=pageBackgroundColor,pageBackgroundColor] (0,0) rectangle (0.5, -0.4);
+		\end{scope}
+	
+		% green, big present
+		\begin{scope}[shift={(0.5,-0.2)}]
+			\filldraw[fill=lightgreen, draw=lightgreen] (1,0) rectangle (5,3);
+			\clip (1,0) rectangle (5,3);
+			\foreach \x/\y in {
+				1/0.5, 2/0.5, 3/0.5, 4/0.5, 5/0.5,
+				1/1.5, 2/1.5, 3/1.5, 4/1.5, 5/1.5,
+				1/2.5, 2/2.5, 3/2.5, 4/2.5, 5/2.5,
+				1.5/0, 2.5/0, 3.5/0, 4.5/0, 5.5/0, 
+				1.5/1, 2.5/1, 3.5/1, 4.5/1, 5.5/1,
+				1.5/2, 2.5/2, 3.5/2, 4.5/2, 5.5/2,
+				1.5/3, 2.5/3, 3.5/3, 4.5/3, 5.5/3
+			}
+			\filldraw[fill=dotGreen,draw=dotGreen] (\x,\y) circle (0.1);
+			\draw[line width=1.5, darkgreen] (3,0) -- (3,3);
+			\draw[line width=1.5, darkgreen] (1,1.5) -- (5,1.5);
+			\draw[line width=2, darkgreen] (3,1.5) .. controls (2.5, 1.5) and (2,0.5) .. cycle; 
+			\draw[line width=2, darkgreen] (3,1.5) .. controls (3.5, 1.5) and (4,0.5) .. cycle; 
+			\draw[line width=2, darkgreen] (3,1.5) .. controls (2.5, 2.5) and (2,1.5) .. cycle;
+			\draw[line width=2, darkgreen] (3,1.5) .. controls (3.5, 2.5) and (4,1.5) .. cycle;
+		\end{scope}
+
+		% blue, middle-sized present
+		\begin{scope}
+			[rotate around={1:(4,4)}, shift={(0.5,-0.1)}]
+			\filldraw[fill=lightblue,draw=lightblue] (2.5,3) rectangle (5.5,5);
+			\clip (2.5,3) rectangle (5.5,5);
+			% stars
+			\foreach \x/\y in {
+				2.5/5.5, 3.5/5.5, 4.5/5.5, 
+				2/4.5, 3/4.5, 4/4.5, 5/4.5, 
+				2.5/3.5, 3.5/3.5, 4.5/3.5
+			} 
+ 			\node [star, star point height=.2cm, minimum size=0.2cm, draw=starBlue, fill=starBlue, rotate around={20:(1,1)}] at (\x,\y) {};
+			\draw[line width=1.5, darkblue] (2.5,4.25) -- (5.5,4.25);
+			\draw[line width=1.5, darkblue] (3.5,3) -- (3.5,5);
+			% bow
+			\draw[line width=1.5, darkblue] (3.5,4.25) -- (3.75,4);
+			\draw[line width=1.5, darkblue] (3.5,4.25) -- (3.25,4);
+			\draw[line width=1.5,darkblue] (3.5,4.25)  to[in=0,out=70,loop] (3.5,4.25);
+			\draw[line width=1.5,darkblue] (3.5,4.25)  to[in=150,out=90,loop] (3.5,4.25);
+		\end{scope}
+	
+		% grey, small present
+		\begin{scope}
+			[rotate around={-1:(3,5.5)},shift={(0.5,0)}]
+			\filldraw[fill=grey,draw=grey] (2,5) rectangle (4,6);
+			\draw[line width=2, lightred] (2,5.5) -- (4,5.5);
+			\draw[line width=2, lightred] (3,6) -- (3,5);
+			\draw[line width=2,lightred] (3,6)  to[in=0,out=60,loop] (3,6);
+			\draw[line width=2,lightred] (3,6)  to[in=120,out=180,loop] (3,6);
+			\draw[line width=2,lightred] (3,6)  to[in=60,out=120,loop] (3,6);
+
+		\end{scope}
+	\end{tikzpicture}
+	}
+
+	\vspace*{10px}
+	AND A HAPPY NEW YEAR!
+\end{document}
